@@ -1,0 +1,10 @@
+camunda.bpm.client:
+  base-url: http://localhost:8080/engine-rest
+  worker-id: spring-boot-worker
+  basic-auth:
+    username: admin
+    password: admin
+    subscriptions:
+      crmEntry: # topic name of the External Service Task
+        variable-names: []
+        process-definition-key: onboarding # only filter for External Tasks with this process definition key
