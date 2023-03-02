@@ -50,4 +50,4 @@ The [application.yml](/worker-java/src/main/resources/application.yml) file defi
 subscriptions to topic names from Camunda to receive external tasks on (here: *crmEntry*) as specified in the process model.
 The class [CRMEntryTaskHandler](/worker-java/src/main/java/com/example/worker/CRMEntryTaskHandler.java) shows the main logic to be executed for this type of external task.
 
-To successfully execute the entire process via the Camunda BPM platform, the SpringBoot application for the worker-java project also needs to be started after the CustomerOnboardingCamundaApplication via its main class [CRMEntryApplicatoin](/worker-java/src/main/java/com/example/CRMEntryApplication.java).
+To successfully execute the entire process via the Camunda BPM platform, the SpringBoot application for the worker-java project also needs to be started after the CustomerOnboardingCamundaApplication via its main class [CRMEntryApplication](/worker-java/src/main/java/com/example/CRMEntryApplication.java).
