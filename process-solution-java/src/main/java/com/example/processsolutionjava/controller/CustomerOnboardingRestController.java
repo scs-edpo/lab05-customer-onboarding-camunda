@@ -2,17 +2,13 @@ package com.example.processsolutionjava.controller;
 
 import com.example.processsolutionjava.utils.WorkflowLogger;
 import org.camunda.bpm.engine.RuntimeService;
-import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.UUID;
-
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * @implSpec : Controller to start a new order process

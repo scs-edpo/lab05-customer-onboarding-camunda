@@ -5,3 +5,6 @@ camunda.bpm:
         firstName: Demo
     filter:
         create: All tasks
+    generic-properties:
+        properties:
+            historyTimeToLive: P1D
