@@ -10,13 +10,17 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <camunda.spring-boot.version>7.22.0</camunda.spring-boot.version>
-        <spring.boot.version>3.4.2</spring.boot.version>
+        <!--<camunda.spring-boot.version>7.22.0</camunda.spring-boot.version>-->
+        <operaton.spring-boot.version>1.0.0</operaton.spring-boot.version>
+
+        <!--<spring.boot.version>3.4.2</spring.boot.version>-->
+        <spring-boot.version>3.5.10</spring-boot.version>
+
         <maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
     </properties>
 
     <dependencies>
-        <dependency>
+        <!--<dependency>
             <groupId>org.camunda.bpm.springboot</groupId>
             <artifactId>camunda-bpm-spring-boot-starter-external-task-client</artifactId>
             <version>${camunda.spring-boot.version}</version>
@@ -26,7 +30,19 @@
                     <artifactId>logback-classic</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>-->
+        <dependency>
+            <groupId>org.operaton.bpm.springboot</groupId>
+            <artifactId>operaton-bpm-spring-boot-starter-external-task-client</artifactId>
+            <version>${operaton.spring-boot.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>

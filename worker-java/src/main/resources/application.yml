@@ -1,4 +1,5 @@
-camunda.bpm.client:
+#camunda.bpm.client:
+operaton.bpm.client:
   base-url: http://localhost:8080/engine-rest
   worker-id: spring-boot-worker
   basic-auth:
