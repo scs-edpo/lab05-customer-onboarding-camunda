@@ -61,47 +61,23 @@ To successfully execute the entire process via the Camunda BPM platform, the Spr
 - This section provides guidelines on how to migrate an existing Camunda 7 project to Operaton. These steps can, for example, be applied to this repository. In addition, we have created a separate branch of this lab that already uses Operaton, which can be found at: [https://github.com/scs-edpo/lab05-customer-onboarding-camunda/tree/operaton-version](https://github.com/scs-edpo/lab05-customer-onboarding-camunda/tree/operaton-version)
 
 
-### 1. Update Dependencies in `pom.xml`
+### 1. Migrating the Process Solution Project (`process-solution-java`)
 
-#### Process Solution Project
-In the [`process-solution-java/pom.xml`](/process-solution-java/pom.xml) file, update the Camunda version variable and dependencies to their Operaton equivalents.
+#### Update Dependencies (`pom.xml`)
+In the [`process-solution-java/pom.xml`](/process-solution-java/pom.xml) file, update the Spring Boot version, the Camunda version variable, and the dependencies to their Operaton equivalents.
 
-First, update the version property:
+First, update the Spring Boot and Operaton version properties:
 ```xml
-<!-- Change this -->
-<camunda.spring-boot.version>7.22.0</camunda.spring-boot.version>
+<!-- Change Spring Boot version -->
+<spring-boot.version>3.5.10</spring-boot.version>
 
-<!-- To this -->
+<!-- Replace camunda.spring-boot.version with operaton.spring-boot.version -->
 <operaton.spring-boot.version>1.0.0</operaton.spring-boot.version>
 ```
 
-Then, replace the Camunda dependencies:
+Then, replace the Camunda dependencies with Operaton dependencies:
 ```xml
-<!-- Replace these dependencies -->
-<dependency>
-    <groupId>org.camunda.bpm.springboot</groupId>
-    <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
-    <version>${camunda.spring-boot.version}</version>
-    <exclusions>
-        <exclusion>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </exclusion>
-    </exclusions>
-</dependency>
-<dependency>
-    <groupId>org.camunda.bpm.springboot</groupId>
-    <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
-    <version>${camunda.spring-boot.version}</version>
-    <exclusions>
-        <exclusion>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </exclusion>
-    </exclusions>
-</dependency>
-
-<!-- With these Operaton dependencies -->
+<!-- Replace camunda-bpm-spring-boot-starter-webapp and camunda-bpm-spring-boot-starter-rest -->
 <dependency>
     <groupId>org.operaton.bpm.springboot</groupId>
     <artifactId>operaton-bpm-spring-boot-starter-webapp</artifactId>
@@ -126,67 +102,56 @@ Then, replace the Camunda dependencies:
 </dependency>
 ```
 
-#### Worker Project
-In the [`worker-java/pom.xml`](/worker-java/pom.xml) file, update the external task client dependency:
-
-```xml
-<!-- Replace this dependency -->
-<dependency>
-    <groupId>org.camunda.bpm.springboot</groupId>
-    <artifactId>camunda-bpm-spring-boot-starter-external-task-client</artifactId>
-    <version>7.22.0</version>
-    <exclusions>
-        <exclusion>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </exclusion>
-    </exclusions>
-</dependency>
-
-<!-- With this Operaton dependency -->
-<dependency>
-    <groupId>org.operaton.bpm.springboot</groupId>
-    <artifactId>operaton-bpm-spring-boot-starter-external-task-client</artifactId>
-    <version>1.0.0</version>
-    <exclusions>
-        <exclusion>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </exclusion>
-    </exclusions>
-</dependency>
-```
-
-#### Spring Boot Version (Both Projects)
-In both [`process-solution-java/pom.xml`](/process-solution-java/pom.xml) and [`worker-java/pom.xml`](/worker-java/pom.xml), update the Spring Boot version:
-
-```xml
-<!-- Change this -->
-<spring-boot.version>3.4.2</spring-boot.version>
-
-<!-- To this -->
-<spring-boot.version>3.5.10</spring-boot.version>
-```
-
-### 2. Update Java Imports
-
-In all Java classes using Camunda libraries, change the package imports from `org.camunda.bpm` to `org.operaton.bpm`.
-
-In the **Process Solution** project, update the following files:
+#### Update Java Imports
+Change the package imports from `org.camunda.bpm` to `org.operaton.bpm` in the following files:
 - [`CustomerOnboardingRestController.java`](/process-solution-java/src/main/java/com/example/processsolutionjava/controller/CustomerOnboardingRestController.java)
 - [`ScoreCustomerAdapter.java`](/process-solution-java/src/main/java/com/example/processsolutionjava/process/ScoreCustomerAdapter.java)
 
-In the **Worker** project, update the following file:
+#### Update Application Properties
+Update the configuration properties to use the Operaton prefix instead of Camunda. Change `camunda.bpm` to `operaton.bpm` in:
+- [`process-solution-java/src/main/resources/application.yaml`](/process-solution-java/src/main/resources/application.yaml)
+
+
+### 2. Migrating the Worker Project (`worker-java`)
+
+#### Update Dependencies (`pom.xml`)
+In the [`worker-java/pom.xml`](/worker-java/pom.xml) file, update the Spring Boot version and the external task client dependency.
+
+First, update the Spring Boot and Operaton version properties:
+```xml
+<!-- Change Spring Boot version -->
+<spring-boot.version>3.5.10</spring-boot.version>
+
+<!-- Replace camunda.spring-boot.version with operaton.spring-boot.version -->
+<operaton.spring-boot.version>1.0.0</operaton.spring-boot.version>
+```
+
+Then, replace the Camunda external task client dependency with the Operaton equivalent:
+```xml
+<!-- Replace camunda-bpm-spring-boot-starter-external-task-client -->
+<dependency>
+    <groupId>org.operaton.bpm.springboot</groupId>
+    <artifactId>operaton-bpm-spring-boot-starter-external-task-client</artifactId>
+    <version>${operaton.spring-boot.version}</version>
+    <exclusions>
+        <exclusion>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+```
+
+#### Update Java Imports
+Change the package imports from `org.camunda.bpm` to `org.operaton.bpm` in the following file:
 - [`CRMEntryTaskHandler.java`](/worker-java/src/main/java/com/example/worker/CRMEntryTaskHandler.java)
 
-### 3. Update Application Properties
-
-Update the configuration properties to use the Operaton prefix instead of Camunda. Change `camunda.bpm` to `operaton.bpm` in the following files:
-
-- [`process-solution-java/src/main/resources/application.yaml`](/process-solution-java/src/main/resources/application.yaml)
+#### Update Application Properties
+Update the configuration properties to use the Operaton prefix instead of Camunda. Change `camunda.bpm` to `operaton.bpm` in:
 - [`worker-java/src/main/resources/application.yml`](/worker-java/src/main/resources/application.yml)
 
-### 4. Rebuild the Projects
+
+### 3. Rebuild the Projects
 
 Finally, clean and rebuild both projects to ensure all changes are applied correctly:
 
