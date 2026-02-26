@@ -14,7 +14,7 @@
         <operaton.spring-boot.version>1.0.0</operaton.spring-boot.version>
 
         <!--<spring.boot.version>3.4.2</spring.boot.version>-->
-        <spring-boot.version>3.5.10</spring-boot.version>
+        <spring.boot.version>3.5.10</spring.boot.version>
 
         <maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
     </properties>
