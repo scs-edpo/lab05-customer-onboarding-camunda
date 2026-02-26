@@ -120,7 +120,7 @@ In the [`worker-java/pom.xml`](/worker-java/pom.xml) file, update the Spring Boo
 First, update the Spring Boot and Operaton version properties:
 ```xml
 <!-- Change Spring Boot version -->
-<spring-boot.version>3.5.10</spring-boot.version>
+<spring.boot.version>3.5.10</spring.boot.version>
 
 <!-- Replace camunda.spring-boot.version with operaton.spring-boot.version -->
 <operaton.spring-boot.version>1.0.0</operaton.spring-boot.version>
