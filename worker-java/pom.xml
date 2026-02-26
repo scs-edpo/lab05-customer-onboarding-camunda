@@ -10,7 +10,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <camunda.platform.runtime.version>7.22.0</camunda.platform.runtime.version>
+        <camunda.spring-boot.version>7.22.0</camunda.spring-boot.version>
         <spring.boot.version>3.4.2</spring.boot.version>
         <maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
     </properties>
@@ -19,7 +19,7 @@
         <dependency>
             <groupId>org.camunda.bpm.springboot</groupId>
             <artifactId>camunda-bpm-spring-boot-starter-external-task-client</artifactId>
-            <version>7.22.0</version>
+            <version>${camunda.spring-boot.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>ch.qos.logback</groupId>
