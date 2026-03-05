@@ -22,7 +22,7 @@ public class CustomerOnboardingRestController {
     private RuntimeService runtimeService;
 
     @RequestMapping(path = "/customer", method = RequestMethod.POST)
-    public String kickOffCustomerOnboarding(String cName) throws Exception{
+    public String kickOffCustomerOnboarding(@RequestParam("cName") String cName) throws Exception{
 
             String traceId = UUID.randomUUID().toString();
 
@@ -31,6 +31,7 @@ public class CustomerOnboardingRestController {
             HashMap<String, Object> variables = new HashMap<String, Object>();
             variables.put("customer", cName);
 
+            // String processDefinitionKey, String businessKey, Map<String, Object> variables
             runtimeService.startProcessInstanceByKey("onboarding",
                     traceId, variables);
 
