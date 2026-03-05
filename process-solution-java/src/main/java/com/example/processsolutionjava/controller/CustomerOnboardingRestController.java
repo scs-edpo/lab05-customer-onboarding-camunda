@@ -23,7 +23,7 @@ public class CustomerOnboardingRestController {
     private RuntimeService runtimeService;
 
     @RequestMapping(path = "/customer", method = RequestMethod.POST)
-    public String kickOffCustomerOnboarding(String cName) throws Exception{
+    public String kickOffCustomerOnboarding(@RequestParam("cName") String cName) throws Exception{
 
             String traceId = UUID.randomUUID().toString();
 
